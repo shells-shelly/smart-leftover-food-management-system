@@ -1,0 +1,29 @@
+# Environment & Secrets
+.env
+.env.local
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Python / Flask Backend
+venv/
+__pycache__/
+*.pyc
+instance/
+
+# SQLite Database Engine
+*.db
+*.sqlite3
+
+# React Frontend
+frontend/node_modules/
+frontend/build/
+frontend/dist/
+
+# PHP / MySQL Analytics Module
+analytics/vendor/
+
+# Editors & IDEs
+.vscode/
+.idea/
