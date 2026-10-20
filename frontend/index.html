@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FoodBridge | Smart Leftover Food Management</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" id="homeLink">
+      <span class="brand-icon">♡</span> FoodBridge
+    </a>
+    <nav>
+      <a href="#availableSection">Available Food</a>
+      <a href="#howItWorks">How it works</a>
+    </nav>
+    <div class="nav-actions" id="navActions">
+      <button class="btn btn-outline" id="loginNav">Login</button>
+      <button class="btn btn-primary" id="registerNav">Get Started</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <span class="eyebrow">SHARE FOOD. CARE FOR PEOPLE.</span>
+        <h1>Good food deserves<br><span>a second chance.</span></h1>
+        <p>Connect surplus food from hotels, restaurants, hostels and marriage halls with NGOs that serve communities.</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" id="heroRegister">Start donating</button>
+          <button class="btn btn-light" id="heroExplore">Explore food</button>
+        </div>
+        <div class="hero-note">Less waste. More meals. Stronger communities.</div>
+      </div>
+      <div class="hero-art">
+        <div class="hero-circle">🍲</div>
+        <div class="floating-card">
+          <span>♧</span>
+          <div><strong>Every meal matters</strong><small>Make surplus food useful</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-grid" id="statsGrid">
+      <article class="stat-card"><span>Total donations</span><strong id="statTotal">0</strong><small>Food listings recorded</small></article>
+      <article class="stat-card"><span>Available food</span><strong id="statAvailable">0</strong><small>Waiting to be claimed</small></article>
+      <article class="stat-card"><span>Claimed donations</span><strong id="statClaimed">0</strong><small>Claimed by NGOs</small></article>
+      <article class="stat-card"><span>Registered donors</span><strong id="statDonors">0</strong><small>Food-sharing partners</small></article>
+    </section>
+
+    <section class="auth-banner" id="authBanner">
+      <div>
+        <h2>Welcome to FoodBridge</h2>
+        <p>Sign in to manage donations, claim food, or access the admin dashboard.</p>
+      </div>
+      <button class="btn btn-primary" id="bannerLogin">Login / Register</button>
+    </section>
+
+    <section class="dashboard hidden" id="dashboard">
+      <div class="section-heading">
+        <div><span class="eyebrow">YOUR WORKSPACE</span><h2 id="dashboardTitle">Dashboard</h2><p id="welcomeText"></p></div>
+        <button class="btn btn-outline" id="logoutBtn">Logout</button>
+      </div>
+      <div id="dashboardContent"></div>
+    </section>
+
+    <section class="section" id="availableSection">
+      <div class="section-heading">
+        <div><span class="eyebrow">FOOD SHARING</span><h2>Available food</h2><p>Browse the food donations currently listed by registered donors.</p></div>
+      </div>
+      <div class="filters">
+        <input id="searchFood" type="search" placeholder="Search food or donor...">
+        <select id="statusFilter">
+          <option value="Available">Available food</option>
+          <option value="all">All statuses</option>
+          <option value="Claimed">Claimed food</option>
+          <option value="Collected">Collected food</option>
+          <option value="Expired">Expired food</option>
+        </select>
+        <button class="btn btn-outline" id="clearFilters">Clear filters</button>
+      </div>
+      <div class="food-grid" id="foodGrid"></div>
+      <div class="empty-state hidden" id="emptyState">
+        <div class="empty-icon">🍽️</div>
+        <h3>No food listings found</h3>
+        <p>When a donor publishes a donation, it will appear here.</p>
+      </div>
+    </section>
+
+    <section class="section how-section" id="howItWorks">
+      <div class="section-heading centered">
+        <span class="eyebrow">SIMPLE PROCESS</span>
+        <h2>How FoodBridge works</h2>
+        <p>Three steps to connect surplus food with people who need it.</p>
+      </div>
+      <div class="steps-grid">
+        <article class="step-card"><span class="step-number">01</span><div class="step-icon">🏪</div><h3>Donors add food</h3><p>Hotels, restaurants, hostels and marriage halls list surplus food, quantity and pickup time.</p></article>
+        <article class="step-card"><span class="step-number">02</span><div class="step-icon">🤝</div><h3>NGOs claim food</h3><p>Registered NGOs browse available donations and claim suitable listings for collection.</p></article>
+        <article class="step-card"><span class="step-number">03</span><div class="step-icon">🍲</div><h3>Food gets collected</h3><p>The NGO reaches the donor location and updates the collection status.</p></article>
+      </div>
+    </section>
+
+    <section class="safety-note">
+      <span>ℹ️</span>
+      <div><strong>Food safety matters</strong><p>Donors should provide accurate food details and safe pickup times. NGOs should verify food condition before distribution.</p></div>
+    </section>
+  </main>
+
+  <footer><a class="brand" href="#">♡ FoodBridge</a><p>Connecting surplus food with communities.</p><small>Smart Leftover Food Management System · Academic project prototype</small></footer>
+
+  <!-- Login / Registration Modal -->
+  <div class="modal hidden" id="authModal">
+    <div class="modal-card">
+      <button class="modal-close" data-close="authModal" aria-label="Close">×</button>
+      <div class="modal-brand">♡ FoodBridge</div>
+      <div class="auth-tabs">
+        <button class="auth-tab active" data-auth-tab="login">Login</button>
+        <button class="auth-tab" data-auth-tab="register">Create account</button>
+      </div>
+      <form id="authForm">
+        <h2 id="authTitle">Welcome back</h2>
+        <p id="authDescription">Login to continue to your dashboard.</p>
+        <div id="registerFields" class="hidden">
+          <label for="orgName">Organization name</label>
+          <input id="orgName" maxlength="100" placeholder="e.g. Community Kitchen">
+          <label for="userRole">Account type</label>
+          <select id="userRole"><option value="Donor">Donor</option><option value="NGO">NGO</option></select>
+          <div id="donorTypeGroup">
+            <label for="donorType">Donor type</label>
+            <select id="donorType"><option>Hotel</option><option>Restaurant</option><option>Hostel</option><option>Marriage Hall</option></select>
+          </div>
+          <label for="phone">Phone number</label>
+          <input id="phone" type="tel" maxlength="15" placeholder="Contact number">
+          <label for="address">Organization address</label>
+          <textarea id="address" maxlength="250" rows="2" placeholder="Enter full pickup address"></textarea>
+        </div>
+        <label for="email">Email address</label>
+        <input id="email" type="email" maxlength="120" required placeholder="you@example.com" autocomplete="username">
+        <label for="password">Password</label>
+        <input id="password" type="password" minlength="6" maxlength="100" required placeholder="At least 6 characters" autocomplete="current-password">
+        <div id="authError" class="form-message hidden" role="alert"></div>
+        <button class="btn btn-primary full-width" type="submit" id="authSubmit">Login</button>
+        <p class="form-footnote">Admin demo login: admin@foodbridge.local / Admin123!</p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add Donation Modal -->
+  <div class="modal hidden" id="donationModal">
+    <div class="modal-card">
+      <button class="modal-close" data-close="donationModal" aria-label="Close">×</button>
+      <div class="modal-brand">♡ FoodBridge</div>
+      <h2>Add food donation</h2>
+      <p>Enter accurate details about the surplus food.</p>
+      <form id="donationForm">
+        <label for="foodName">Food name</label>
+        <input id="foodName" required maxlength="100" placeholder="e.g. Rice, dal and sabzi">
+        <label for="quantity">Quantity</label>
+        <input id="quantity" required type="number" min="1" max="100000" step="1" placeholder="Number of meals / packets">
+        <label for="quantityUnit">Quantity unit</label>
+        <select id="quantityUnit"><option>Meals</option><option>Packets</option><option>Kg</option><option>Plates</option></select>
+        <label for="pickupTime">Pickup deadline</label>
+        <input id="pickupTime" required type="datetime-local">
+        <label for="foodNotes">Additional details (optional)</label>
+        <textarea id="foodNotes" rows="3" maxlength="500" placeholder="Preparation time, packaging or other relevant details"></textarea>
+        <div id="donationError" class="form-message hidden" role="alert"></div>
+        <button class="btn btn-primary full-width" type="submit">Publish donation</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast hidden" id="toast" role="status"></div>
+  <script src="script.js"></script>
+</body>
+</html>
